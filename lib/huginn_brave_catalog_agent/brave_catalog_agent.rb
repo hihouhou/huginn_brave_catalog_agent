@@ -147,33 +147,50 @@ module Agents
       payload = JSON.parse(response.body)
 
       if interpolated['changes_only'] == 'true'
-        if payload['campaigns'].to_s != memory['last_status']
+        if payload.to_s != memory['last_status']
           if "#{memory['last_status']}" == ''
             payload['campaigns'].each do |campaign|
-              create_event payload: campaign
+              creatives = campaign['creativeSets']
+              creatives[0]['creatives'].each do |creative|
+                creative[:startAt] = campaign['startAt']
+                creative[:endAt] = campaign['endAt']
+                creative[:campaignId] = campaign['campaignId']
+                creative[:geoTargets] = campaign['geoTargets']
+                create_event payload: creative
             end
+          end
           else
-            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil", ": null")
+          log "not equal"
+            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil", ": null").gsub(":endAt", "\"endAt\"").gsub(":startAt", "\"startAt\"").gsub(":campaignId", "\"campaignId\"").gsub(":geoTargets", "\"geoTargets\"")
             last_status = JSON.parse(last_status)
             payload['campaigns'].each do |campaign|
-              found = false
-              last_status.each do |campaignbis|
+              creatives = campaign['creativeSets']
+              creatives[0]['creatives'].each do |creative|
+                found = false
+#                 log "#{found}"
+                last_status['campaigns'] .each do |campaignbis|
 #this check is neeeded because segments are not in the same order
-                if campaign['campaignId'] == campaignbis['campaignId']
-                    found = true
+                  if campaign['campaignId'] == campaignbis['campaignId']
+                      found = true
+#                      log "#{found}"
+                  end
                 end
-              end
-              if found == false
-                  create_event payload: campaign
+                if found == false
+                  creative[:startAt] = campaign['startAt']
+                  creative[:endAt] = campaign['endAt']
+                  creative[:campaignId] = campaign['campaignId']
+                  creative[:geoTargets] = campaign['geoTargets']
+                  create_event payload: creative
+                end
               end
             end
           end
-          memory['last_status'] = payload['campaigns'].to_s
+          memory['last_status'] = payload.to_s
         end
       else
-        create_event payload: payload['campaigns']
-        if payload['campaigns'].to_s != memory['last_status']
-          memory['last_status'] = payload['campaigns'].to_s
+        create_event payload: payload
+        if payload.to_s != memory['last_status']
+          memory['last_status'] = payload.to_s
         end
       end
     end
