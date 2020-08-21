@@ -139,7 +139,7 @@ module Agents
     private
 
     def fetch
-      uri = URI.parse("https://ads-serve.brave.com/v2/catalog")
+      uri = URI.parse("https://ads-serve.brave.com/v3/catalog")
       response = Net::HTTP.get_response(uri)
 
       log "request  status : #{response.code}"
@@ -156,6 +156,7 @@ module Agents
                 creative[:endAt] = campaign['endAt']
                 creative[:campaignId] = campaign['campaignId']
                 creative[:geoTargets] = campaign['geoTargets']
+                creative[:advertiserId] = campaign['advertiserId']
                 create_event payload: creative
             end
           end
@@ -180,6 +181,7 @@ module Agents
                   creative[:endAt] = campaign['endAt']
                   creative[:campaignId] = campaign['campaignId']
                   creative[:geoTargets] = campaign['geoTargets']
+                creative[:advertiserId] = campaign['advertiserId']
                   create_event payload: creative
                 end
               end
