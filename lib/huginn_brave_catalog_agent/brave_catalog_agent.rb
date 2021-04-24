@@ -10,6 +10,8 @@ module Agents
       <<-MD
       The huginn catalog agent checks if new campaign is available.
 
+      `debug` is used to verbose mode.
+
       `changes_only` is only used to emit event about a currency's change.
 
       `expected_receive_period_in_days` is used to determine if the Agent is working. Set it to the maximum number of days
@@ -103,6 +105,7 @@ module Agents
 
     def default_options
       {
+        'debug' => 'false',
         'expected_receive_period_in_days' => '2',
         'changes_only' => 'true'
       }
@@ -110,10 +113,15 @@ module Agents
 
     form_configurable :expected_receive_period_in_days, type: :string
     form_configurable :changes_only, type: :boolean
+    form_configurable :debug, type: :boolean
 
     def validate_options
       if options.has_key?('changes_only') && boolify(options['changes_only']).nil?
         errors.add(:base, "if provided, changes_only must be true or false")
+      end
+
+      if options.has_key?('debug') && boolify(options['debug']).nil?
+        errors.add(:base, "if provided, debug must be true or false")
       end
 
       unless options['expected_receive_period_in_days'].present? && options['expected_receive_period_in_days'].to_i > 0
@@ -139,6 +147,9 @@ module Agents
 
       payload = JSON.parse(response.body)
 
+      if interpolated['debug'] == 'true'
+        log payload
+      end
       if interpolated['changes_only'] == 'true'
         if payload.to_s != memory['last_status']
           if "#{memory['last_status']}" == ''
@@ -161,12 +172,16 @@ module Agents
               creatives = campaign['creativeSets']
               creatives[0]['creatives'].each do |creative|
                 found = false
-#                 log "#{found}"
+                if interpolated['debug'] == 'true'
+                  log "#{found}"
+                end
                 last_status['campaigns'] .each do |campaignbis|
 #this check is neeeded because segments are not in the same order
                   if campaign['campaignId'] == campaignbis['campaignId']
                       found = true
-#                      log "#{found}"
+                      if interpolated['debug'] == 'true'
+                        log "#{found}"
+                      end
                   end
                 end
                 if found == false
