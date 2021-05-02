@@ -166,7 +166,7 @@ module Agents
           end
           else
             log "not equal"
-            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil", ": null").gsub(":endAt", "\"endAt\"").gsub(":startAt", "\"startAt\"").gsub(":campaignId", "\"campaignId\"").gsub(":geoTargets", "\"geoTargets\"").gsub(":advertiserId", "\"advertiserId\"").gsub!("\\u", "\\\\\\u")
+            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil", ": null").gsub(":endAt", "\"endAt\"").gsub(":startAt", "\"startAt\"").gsub(":campaignId", "\"campaignId\"").gsub(":geoTargets", "\"geoTargets\"").gsub(":advertiserId", "\"advertiserId\"").gsub("\\", "\\\\\\")
             last_status = JSON.parse(last_status)
             payload['campaigns'].each do |campaign|
               creatives = campaign['creativeSets']
@@ -181,6 +181,7 @@ module Agents
                       found = true
                       if interpolated['debug'] == 'true'
                         log "#{found}"
+                        log campaignbis['campaignId']
                       end
                   end
                 end
@@ -189,7 +190,7 @@ module Agents
                   creative[:endAt] = campaign['endAt']
                   creative[:campaignId] = campaign['campaignId']
                   creative[:geoTargets] = campaign['geoTargets']
-                creative[:advertiserId] = campaign['advertiserId']
+                  creative[:advertiserId] = campaign['advertiserId']
                   create_event payload: creative
                 end
               end
