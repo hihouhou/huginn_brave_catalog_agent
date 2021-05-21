@@ -140,7 +140,7 @@ module Agents
     private
 
     def fetch
-      uri = URI.parse("https://ads-serve.brave.com/v4/catalog")
+      uri = URI.parse("https://ads-serve.brave.com/v7/catalog")
       response = Net::HTTP.get_response(uri)
 
       log "request  status : #{response.code}"
