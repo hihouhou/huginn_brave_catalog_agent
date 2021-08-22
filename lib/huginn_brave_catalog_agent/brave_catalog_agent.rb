@@ -21,86 +21,87 @@ module Agents
 
     event_description <<-MD
       Events look like this:
-        {
-          "creativeSets": [
-            {
-              "creatives": [
-                {
-                  "creativeInstanceId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-                  "type": {
-                    "code": "notification_all_v1",
-                    "name": "notification",
-                    "platform": "all",
-                    "version": 1
+
+          {
+            "creativeSets": [
+              {
+                "creatives": [
+                  {
+                    "creativeInstanceId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+                    "type": {
+                      "code": "notification_all_v1",
+                      "name": "notification",
+                      "platform": "all",
+                      "version": 1
+                    },
+                    "payload": {
+                      "body": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+                      "title": "XXXXX",
+                      "targetUrl": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                    }
                   },
-                  "payload": {
-                    "body": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-                    "title": "XXXXX",
-                    "targetUrl": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-                  }
-                },
-                {
-                  "creativeInstanceId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-                  "type": {
-                    "code": "notification_all_v1",
-                    "name": "notification",
-                    "platform": "all",
-                    "version": 1
+                  {
+                    "creativeInstanceId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+                    "type": {
+                      "code": "notification_all_v1",
+                      "name": "notification",
+                      "platform": "all",
+                      "version": 1
+                    },
+                    "payload": {
+                      "body": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+                      "title": "XXXXX",
+                      "targetUrl": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                    }
                   },
-                  "payload": {
-                    "body": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-                    "title": "XXXXX",
-                    "targetUrl": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                  {
+                    "creativeInstanceId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+                    "type": {
+                      "code": "notification_all_v1",
+                      "name": "notification",
+                      "platform": "all",
+                      "version": 1
+                    },
+                    "payload": {
+                      "body": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+                      "title": "XXXXX",
+                      "targetUrl": "https://XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                    }
                   }
-                },
-                {
-                  "creativeInstanceId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-                  "type": {
-                    "code": "notification_all_v1",
-                    "name": "notification",
-                    "platform": "all",
-                    "version": 1
-                  },
-                  "payload": {
-                    "body": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-                    "title": "XXXXX",
-                    "targetUrl": "https://XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                ],
+                "segments": [
+                  {
+                    "code": "XXXXXXXXXX",
+                    "name": "XXXXXXXXXXXXXXXX"
                   }
-                }
-              ],
-              "segments": [
-                {
-                  "code": "XXXXXXXXXX",
-                  "name": "XXXXXXXXXXXXXXXX"
-                }
-              ],
-              "oses": [
-        
-              ],
-              "conversions": [
-        
-              ],
-              "creativeSetId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-              "perDay": 2,
-              "totalMax": 60
-            }
-          ],
-          "dayParts": [
-        
-          ],
-          "geoTargets": [
-            {
-              "code": "XX",
-              "name": "XXXXXX"
-            }
-          ],
-          "campaignId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-          "startAt": "XXXXXXXXXXXXXXXXXXXXXXXX",
-          "endAt": "XXXXXXXXXXXXXXXXXXXXXXXX",
-          "dailyCap": 2,
-          "advertiserId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-          "priority": 1
-        }
+                ],
+                "oses": [
+          
+                ],
+                "conversions": [
+          
+                ],
+                "creativeSetId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+                "perDay": 2,
+                "totalMax": 60
+              }
+            ],
+            "dayParts": [
+          
+            ],
+            "geoTargets": [
+              {
+                "code": "XX",
+                "name": "XXXXXX"
+              }
+            ],
+            "campaignId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+            "startAt": "XXXXXXXXXXXXXXXXXXXXXXXX",
+            "endAt": "XXXXXXXXXXXXXXXXXXXXXXXX",
+            "dailyCap": 2,
+            "advertiserId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+            "priority": 1
+          }
     MD
 
     def default_options
